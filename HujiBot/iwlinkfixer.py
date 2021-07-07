@@ -28,7 +28,7 @@ class iwlinkfixer:
         if matches is None:
             return False
         for m in matches:
-            original = "{{%s%s}}" % (m)
+            original = "{{%s}}" % (m)
             param_str = m[1]
             params = re.findall(param_pattern, param_str)
 
@@ -63,7 +63,7 @@ class iwlinkfixer:
             p = pywikibot.Page(pywikibot.Site("fa"), link_target)
             if p.exists():
                 print("Local page exists; using it to create a link")
-                replacement = "[[%s%s]]" % (link_target, link_title)
+                replacement = "[[%s|%s]]" % (link_target, link_title)
                 print("Replacement wikitext: %s" % replacement)
                 page_text = page_text.replace(original, replacement)
                 continue
@@ -83,7 +83,7 @@ class iwlinkfixer:
 
                 if new_target is not None:
                     print("Using interwiki backlink to create a link")
-                    replacement = "[[%s%s]]" % (new_target, link_title)
+                    replacement = "[[%s|%s]]" % (new_target, link_title)
                     print("Replacement wikitext: %s" % replacement)
                     page_text = page_text.replace(original, replacement)
                     continue
